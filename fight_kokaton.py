@@ -197,18 +197,18 @@ def main():
             
         for i, bomb in enumerate(bombs):#noneじゃないか確認してからnoneにする
             for j, beam in enumerate(beams):#演習課題2
-                if bomb is not None:
-                    if beam is not None:
-                        if beam.rct.colliderect(bomb.rct): #練習２：爆弾とビームの衝突判定
-                            bombs[i] = None
-                            beams[j] = None
-                            score.score += 1 #演習1:スコアアップ
-                            bird.change_img(6, screen) #練習３Happy
-                            pg.display.update()
+                # if bomb is not None:
+                #     if beam is not None:
+                if beam.rct.colliderect(bomb.rct): #練習２：爆弾とビームの衝突判定
+                    bombs[i] = None
+                    beams[j] = None
+                    score.score += 1 #演習1:スコアアップ
+                    bird.change_img(6, screen) #練習３Happy
+                    pg.display.update()
                     #time.sleep(1)
-        
+            beams = [beam for beam in beams if beam is not None and check_bound(beam.rct) == (True, True)]#演習課題2
         bombs = [bomb for bomb in bombs if bomb is not None]
-        beams = [beam for beam in beams if beam is not None and check_bound(beam.rct) == (True, True)]#演習課題2
+        # beams = [beam for beam in beams if beam is not None and check_bound(beam.rct) == (True, True)]#演習課題2
 
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
